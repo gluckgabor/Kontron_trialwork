@@ -6,10 +6,10 @@ import io.cucumber.junit.Cucumber;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features="src/test/resources/features/Example.feature",
+		features="src/test/resources/features/PetClinic_CRUD_API_Tests.feature",
 		glue="stepDefinitions",
-		/*monochrome=true,
-		tags="",*/
+		monochrome=true,
+		tags="@CRUD and @AddOwner and @UpdateOwner and @DeleteOwner",
 		plugin={"utilities.MyCustomListener",
 				"pretty",
 				"html:reports/htmlReports/cucumber.html",

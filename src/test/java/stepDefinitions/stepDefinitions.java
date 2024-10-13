@@ -2,31 +2,24 @@ package stepDefinitions;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import pojoClasses.ResponseLoader;
 import utilities.BaseClass;
 
 //import static io.restassured.RestAssured.*;
-
-import java.io.FileNotFoundException;
 
 import java.util.List;
 import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.junit.Assert;
-
-import factory.Loader;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 
-public class CommonSteps extends BaseClass {
+public class stepDefinitions extends BaseClass {
 	
-	private static Logger logger = LogManager.getLogger(CommonSteps.class);
+	private static Logger logger = LogManager.getLogger(stepDefinitions.class);
 
 	private int createdOwnerId;
 
@@ -100,38 +93,38 @@ public class CommonSteps extends BaseClass {
 
 	// Step definitions for updating an owner
 	@Given("I update an Owner to have following data and save it")
-		public void i_update_an_owner_to_have_following_data(DataTable dataTable) {
-			String baseUrl = "http://localhost:9966/petclinic/api/owners/" + createdOwnerId;
+	public void i_update_an_owner_to_have_following_data(io.cucumber.datatable.DataTable dataTable) {
+		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + createdOwnerId;
 
-			String firstName = "";
-			String lastName = "";
-			String address= "";
-			String city= "";
-			String telephone= "";
+		String firstName = "";
+		String lastName = "";
+		String address= "";
+		String city= "";
+		String telephone= "";
 
-			List<Map<String, String>> owners = dataTable.asMaps(String.class, String.class);
+		List<Map<String, String>> owners = dataTable.asMaps(String.class, String.class);
 
-			for (Map<String, String> owner : owners) {
-				firstName = owner.get("firstName");
-				lastName = owner.get("lastName");
-				address = owner.get("address");
-				city = owner.get("city");
-				telephone = owner.get("telephone");
+		for (Map<String, String> owner : owners) {
+			firstName = owner.get("firstName");
+			lastName = owner.get("lastName");
+			address = owner.get("address");
+			city = owner.get("city");
+			telephone = owner.get("telephone");
 
 
-				String requestBody = String.format(
-					"{\"firstName\": \"%s\", \"lastName\": \"%s\", \"address\": \"%s\", \"city\": \"%s\", \"telephone\": \"%s\"}",
-					firstName, lastName, address, city, telephone
-				);
+			String requestBody = String.format(
+				"{\"firstName\": \"%s\", \"lastName\": \"%s\", \"address\": \"%s\", \"city\": \"%s\", \"telephone\": \"%s\"}",
+				firstName, lastName, address, city, telephone
+			);
 
-			given()
-					.header("Content-Type", "application/json")
-					.body(requestBody)
-					.when()
-					.put(baseUrl)
-					.then()
-					.statusCode(200); // Typically, a 204 No Content response is returned for successful updates
-			}
+		given()
+				.header("Content-Type", "application/json")
+				.body(requestBody)
+				.when()
+				.put(baseUrl)
+				.then()
+				.statusCode(200); // Typically, a 204 No Content response is returned for successful updates
+		}
 	}
 
 	// Step definitions for deleting an owner
