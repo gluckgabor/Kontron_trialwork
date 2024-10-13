@@ -17,14 +17,28 @@ import org.apache.logging.log4j.Logger;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-
-
 public class stepDefinitions extends BaseClass {
+	public stepDefinitions() {}
+
+	public TestContext testContext = new TestContext();
+
+	public stepDefinitions(TestContext testContext) {
+		this.testContext = testContext;
+	}
+
+	int createdOwnerId = testContext.getCreatedOwnerId();
+	public void setCreatedOwnerId(int x) {
+		createdOwnerId = testContext.getCreatedOwnerId();
+	}
+
+	public int getCreatedOwnerId() {
+		return testContext.getCreatedOwnerId();
+	}
 	
 	private static Logger logger = LogManager.getLogger(stepDefinitions.class);
 
-	public TestContext testContext = new TestContext();
-	public int createdOwnerId = testContext.getCreatedOwnerId();
+
+
 
 	@Given("I add an Owner with following data and save it")
 	public void i_add_an_owner_with_following_data(DataTable dataTable) {
@@ -63,7 +77,8 @@ public class stepDefinitions extends BaseClass {
 			String responseBody = response.getBody().asString();
 			System.out.println(responseBody);
 
-			testContext.setCreatedOwnerId(response.jsonPath().getInt("id"));
+			int createdOwnerId = response.jsonPath().getInt("id");
+			testContext.setCreatedOwnerId(createdOwnerId);
 		}
 	}
 
@@ -80,8 +95,8 @@ public class stepDefinitions extends BaseClass {
 
 	@Then("I see owner is loaded back correctly")
 	public void i_see_owner_is_loaded_back_correctly () {
-		createdOwnerId = testContext.getCreatedOwnerId();
-		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + createdOwnerId;
+		int createdOwnerId = testContext.getCreatedOwnerId();
+		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.getCreatedOwnerId();;
 
 		given()
 				.when()
@@ -98,8 +113,8 @@ public class stepDefinitions extends BaseClass {
 	// Step definitions for updating an owner
 	@Given("I update an Owner to have following data and save it")
 	public void i_update_an_owner_to_have_following_data(io.cucumber.datatable.DataTable dataTable) {
-		//createdOwnerId = testContext.getCreatedOwnerId();
-		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.createdOwnerId;
+		int createdOwnerId = testContext.getCreatedOwnerId();
+		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.getCreatedOwnerId();
 
 		String firstName = "";
 		String lastName = "";
