@@ -26,7 +26,7 @@ public class seleniumFrontEndTest {
         private WebDriver driver;
         private SpecialtyPage specialtyPage;
 
-        private static ExtentReports extent = ExtentManager.createInstance("target/extent-report.html");
+        private static ExtentReports extent = ExtentManager.createInstance("target/extent-report1.html");
         private static ExtentTest test;
 
         @Before
@@ -75,6 +75,7 @@ public class seleniumFrontEndTest {
             System.out.println("Specialty added and verified successfully.");
 
             test.pass("Specialty successfully added");
+            ExtentManager.flush();
         }
 
         @After
