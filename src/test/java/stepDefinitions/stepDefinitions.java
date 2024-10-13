@@ -1,5 +1,7 @@
 package stepDefinitions;
 
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.*;
 import io.restassured.response.Response;
@@ -13,11 +15,17 @@ import context.TestContext;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import utilities.ExtentManager;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class stepDefinitions extends BaseClass {
+
+	private static ExtentReports extent = ExtentManager.createInstance("target/extent-report.html");
+	private static ExtentTest test;
+
+
 	private static TestContext testContext = new TestContext(); // Singleton instance of TestContext
 	public stepDefinitions() {}
 
@@ -32,6 +40,11 @@ public class stepDefinitions extends BaseClass {
 
 	@Given("I add an Owner with following data and save it")
 	public void i_add_an_owner_with_following_data(DataTable dataTable) {
+
+		test = ExtentManager.createTest("Add Owner Test");
+		test.info("Adding an owner");
+
+
 		String baseUrl = "http://localhost:9966/petclinic/api/owners";
 
 		String firstName = "";
@@ -69,6 +82,9 @@ public class stepDefinitions extends BaseClass {
 
 			int createdOwnerId = response.jsonPath().getInt("id");
 			testContext.setCreatedOwnerId(createdOwnerId);
+
+			test.pass("Owner added successfully with ID: " + createdOwnerId);
+			testContext.setCreatedOwnerId(createdOwnerId);
 		}
 	}
 
@@ -85,6 +101,7 @@ public class stepDefinitions extends BaseClass {
 
 	@Then("I see owner is loaded back correctly")
 	public void i_see_owner_is_loaded_back_correctly () {
+		test.info("Validating owner data after loading it back");
 		int createdOwnerId = testContext.getCreatedOwnerId();
 		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.getCreatedOwnerId();;
 
@@ -98,6 +115,8 @@ public class stepDefinitions extends BaseClass {
 				.body("address", equalTo("110 W. Liberty St."))
 				.body("city", equalTo("Madison"))
 				.body("telephone", equalTo("6085551023"));
+
+		test.pass("Owner loaded back correctly and validated");
 	}
 
 	@Then("I see owner is loaded back correctly after update")
@@ -120,6 +139,9 @@ public class stepDefinitions extends BaseClass {
 	// Step definitions for updating an owner
 	@Given("I update an Owner to have following data and save it")
 	public void i_update_an_owner_to_have_following_data(io.cucumber.datatable.DataTable dataTable) {
+		test = ExtentManager.createTest("Update Owner Test");
+		test.info("Updating owner");
+
 		int createdOwnerId = testContext.getCreatedOwnerId();
 		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.getCreatedOwnerId();
 
@@ -144,19 +166,22 @@ public class stepDefinitions extends BaseClass {
 				firstName, lastName, address, city, telephone
 			);
 
-		given()
-				.header("Content-Type", "application/json")
-				.body(requestBody)
-				.when()
-				.put(baseUrl)
-				.then()
-				.statusCode(204); // Typically, a 204 No Content response is returned for successful updates
+			given()
+					.header("Content-Type", "application/json")
+					.body(requestBody)
+					.when()
+					.put(baseUrl)
+					.then()
+					.statusCode(204); // Typically, a 204 No Content response is returned for successful updates
 		}
+		test.pass("Owner updated successfully");
 	}
 
 	// Step definitions for deleting an owner
 	@Given("I delete an Owner")
 	public void i_delete_an_owner() {
+		test = ExtentManager.createTest("Delete Owner Test");
+		test.info("Deleting an owner");
 		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.createdOwnerId;
 
 		given()
@@ -164,10 +189,13 @@ public class stepDefinitions extends BaseClass {
 				.delete(baseUrl)
 				.then()
 				.statusCode(204); // Typically, a 204 No Content response is returned for successful deletions
+
+		test.pass("Owner deleted successfully");
 	}
 
 	@Then("I see owner is correctly missing from returned results")
 	public void i_see_owner_is_correctly_missing_from_returned_results() {
+		test.info("Validating that the owner is correctly missing after deletion");
 		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.createdOwnerId;
 
 		given()
@@ -175,8 +203,9 @@ public class stepDefinitions extends BaseClass {
 				.get(baseUrl)
 				.then()
 				.statusCode(404); // Expecting 404 Not Found since the owner has been deleted
+
+		test.pass("Owner is correctly missing from the returned results");
+		ExtentManager.flush();
 	}
-
-
 }
 

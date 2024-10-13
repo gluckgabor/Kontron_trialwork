@@ -77,6 +77,27 @@
 			<artifactId>extentreports</artifactId>
 			<version>5.1.1</version>
 		</dependency>
+		<!-- Selenium Java -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>4.4.0</version> <!-- Use the latest version -->
+		</dependency>
+
+		<!-- WebDriver Manager to handle browser drivers -->
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>5.1.0</version> <!-- Use the latest version -->
+		</dependency>
+
+		<!-- TestNG for test management -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>7.7.0</version>
+			<scope>test</scope>
+		</dependency>
 
 
 	</dependencies>
