@@ -7,23 +7,6 @@
 - Enables writing human-readable test scenarios that bridge the gap between non-technical stakeholders and developers.
 #### Extent Reports:
 - Generates visually appealing and detailed test reports with screenshots, logs, and results.
-#### Response Value Reuse:
-- The framework allows passing response values from one API request to another. Simply reference the value using the $ symbol as "$key" to inject it into subsequent API requests dynamically.
-#### Comprehensive Logging:
-  Logs are configured at a high level, printing detailed information for each test scenario, including:
-  - Scenario name
-  - Duration
-  - Execution status (pass/fail)
-  - Failure cause or error (if any)
-#### Database Integration:
-- The framework can push scenario execution details (status, duration, errors) into a database for further analysis and tracking.
-#### Multi-Database Support:
-  The framework connects with different SQL databases such as:
-  - Oracle
-  - DB2
-  - MySQL This allows for executing queries across various database environments and validating data integrity.
-#### Spring Batch Integration:
-- The framework includes a Batches class, which executes Spring Batch jobs for batch processing use cases.
 
 ## Prerequisites
 - Java 17 or higher
@@ -32,35 +15,6 @@
 - RestAssured 5.4.0v or higher
 - Cucumber 7.16v or higher
 - Extent-reports 5.0v or higher
-
-## How to run form cmd line
-In the pom.xml, we have configured Extent reports and run the features by following different commands.
-
-### To build the Project
-To build the project and download all dependencies, run the whole suite following Maven command:
-```bash
-mvn clean install
-```
-
-### To run specific feature, use the following command:
-```bash
-mvn clean install -Dcucumber.options="--features src/test/resources/features/placeValidations.feature"
-```
-
-### To run multiple features, use the following command:
-```bash
-mvn clean install -Dcucumber.options="--features src/test/resources/features/placeValidations.feature,src/test/resources/features/Example.feature"
-```
-
-### To run scenarios with Tag's, use the following command:
-```bash
-mvn clean install -Dcucumber.options="--tags @Regression"
-```
-
-### To run features with Tag's, use the following command:
-```bash
-mvn clean install -Dcucumber.options="--features src/test/resources/features/placeValidations.feature --tags @Regression"
-```
 
 ## Jenkins CI/CD
 #### General Section:
