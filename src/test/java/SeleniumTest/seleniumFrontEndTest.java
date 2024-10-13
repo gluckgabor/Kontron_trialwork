@@ -1,6 +1,7 @@
 package SeleniumTest;
 
 import PageObjectModelForSeleniumTest.SpecialtyPage;
+import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -24,6 +25,9 @@ public class seleniumFrontEndTest {
     public static class SpecialtyTest {
         private WebDriver driver;
         private SpecialtyPage specialtyPage;
+
+        private static ExtentReports extent = ExtentManager.createInstance("target/extent-report.html");
+        private static ExtentTest test;
 
         @Before
         public void setUp() {
