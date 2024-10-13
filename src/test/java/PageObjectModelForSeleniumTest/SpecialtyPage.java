@@ -15,8 +15,8 @@ public class SpecialtyPage {
     @FindBy(xpath = "//button[text()='Save']")
     private WebElement saveButton;
 
-    @FindBy(xpath = "//button[text()='Add']")
-    private WebElement addButton;
+    @FindBy(xpath = "/html/body/app-root/div[2]/app-specialty-list/div/div/div/button[2]")
+    public WebElement addButton;
 
     @FindBy(xpath = "//table[@id='specialties']//button[text()='Edit']")
     private WebElement editButton;
