@@ -1,5 +1,5 @@
-20:46:22.780 [main] INFO  stepDefinitions.Hooks - ******************* Test Suit Started **********************
-20:46:29.054 [main] INFO  utilities.MyCustomListener - 
+21:27:56.529 [main] INFO  stepDefinitions.Hooks - ******************* Test Suit Started **********************
+21:28:01.224 [main] INFO  utilities.MyCustomListener - 
         __    _____ _____ ____ _____   ____   _    ____  ____  _____ ____  
   _     \ \  |_   _| ____/ ___|_   _| |  _ \ / \  / ___|/ ___|| ____|  _ \ 
  (_)_____| |   | | |  _| \___ \ | |   | |_) / _ \ \___ \\___ \|  _| | | | |
@@ -9,8 +9,8 @@
 
 TEST PASSED: 1 Owners create and read test 
 ----------------------------------------------------------------------
-20:46:29.054 [main] INFO  stepDefinitions.Hooks - Entered after scenario
-20:46:31.838 [main] INFO  utilities.MyCustomListener - 
+21:28:01.224 [main] INFO  stepDefinitions.Hooks - Entered after scenario
+21:28:02.765 [main] INFO  utilities.MyCustomListener - 
         __    _____ _____ ____ _____   ____   _    ____  ____  _____ ____  
   _     \ \  |_   _| ____/ ___|_   _| |  _ \ / \  / ___|/ ___|| ____|  _ \ 
  (_)_____| |   | | |  _| \___ \ | |   | |_) / _ \ \___ \\___ \|  _| | | | |
@@ -20,8 +20,8 @@ TEST PASSED: 1 Owners create and read test
 
 TEST PASSED: 2 Owners update and read test 
 ----------------------------------------------------------------------
-20:46:31.838 [main] INFO  stepDefinitions.Hooks - Entered after scenario
-20:46:33.409 [main] INFO  utilities.MyCustomListener - 
+21:28:02.766 [main] INFO  stepDefinitions.Hooks - Entered after scenario
+21:28:05.805 [main] INFO  utilities.MyCustomListener - 
         __    _____ _____ ____ _____   ____   _    ____  ____  _____ ____  
   _     \ \  |_   _| ____/ ___|_   _| |  _ \ / \  / ___|/ ___|| ____|  _ \ 
  (_)_____| |   | | |  _| \___ \ | |   | |_) / _ \ \___ \\___ \|  _| | | | |
@@ -31,5 +31,5 @@ TEST PASSED: 2 Owners update and read test
 
 TEST PASSED: 3 Owners delete and read test 
 ----------------------------------------------------------------------
-20:46:33.410 [main] INFO  stepDefinitions.Hooks - Entered after scenario
-20:46:33.411 [main] INFO  stepDefinitions.Hooks - ******************* Test Suit Completed **********************
+21:28:05.805 [main] INFO  stepDefinitions.Hooks - Entered after scenario
+21:28:05.808 [main] INFO  stepDefinitions.Hooks - ******************* Test Suit Completed **********************
