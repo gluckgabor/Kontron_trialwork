@@ -29,39 +29,11 @@ public class Hooks {
 	 * BeforeStep hook is executed the AfterStep hooks will also be executed regardless of the result of the step.
 	 * If a step did not pass, the following step and its hooks will be skipped.
 	 */
-	
-	
+
 	private static PrintStream apiLogs;
 	private static String featureName;
-	
 	private static Logger logger = LogManager.getLogger(Hooks.class);
-	
-	@BeforeStep
-	public void doSomethingBeforeStep(Scenario scenario){
-		
-	}
-	
-	@AfterStep
-	public void doSomethingAfterStep(Scenario scenario){
-		
-	}
-	
-	@Before
-	public void beforeScenario(Scenario scenario) throws FileNotFoundException {
-		
-		logger.info("Entered before scenario");
-		
-		featureName = null;
-		featureName = new File(scenario.getUri()).getName();
-		featureName = featureName.substring(0, featureName.lastIndexOf(".feature"));
-		
-		String featurePath = scenario.getUri().getPath();
-		MyCustomListener.getTestStartedLog(scenario.getName(), featurePath.substring(featurePath.indexOf("src")));
-		
-		System.out.println("********** " + scenario.getName() + " is started *********");
-		BaseClass.initiateBaseURL(apiLogs);
-	}
-	
+
 	
 	@After
 	public void afterScenario(Scenario scenario) {
@@ -90,8 +62,4 @@ public class Hooks {
 		apiLogs.close();
 		logger.info("******************* Test Suit Completed **********************");
 	}
-	
-	
-
-
 }
