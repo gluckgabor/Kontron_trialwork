@@ -31,7 +31,11 @@ public class seleniumFrontEndTest {
             specialtyPage.clickAddButton();
             specialtyPage.enterSpecialtyName("New Specialty");
             specialtyPage.clickSaveButton();
-            System.out.println("Specialty added successfully.");
+            driver.navigate().refresh();
+            // Assert if 'New Specialty' is displayed in the specialties table
+            boolean isSpecialtyPresent = driver.getPageSource().contains("New Specialty");
+            assert isSpecialtyPresent : "New Specialty not found after refresh.";
+            System.out.println("Specialty added and verified successfully.");
         }
 
         @AfterMethod
