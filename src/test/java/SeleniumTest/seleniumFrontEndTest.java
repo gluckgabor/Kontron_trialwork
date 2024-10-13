@@ -1,6 +1,7 @@
 package SeleniumTest;
 
 import PageObjectModelForSeleniumTest.SpecialtyPage;
+import com.aventstack.extentreports.ExtentTest;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.NoSuchElementException;
@@ -12,6 +13,7 @@ import org.junit.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
+import utilities.ExtentManager;
 
 import java.time.Duration;
 
@@ -40,6 +42,8 @@ public class seleniumFrontEndTest {
 
         @Test
         public void addSpecialtyTest() {
+            ExtentTest test = ExtentManager.createTest("Selenium frontend test for adding specialty");
+            test.info("Adding specialty");
 
             // Fluent Wait setup
             Wait<WebDriver> wait = new FluentWait<>(driver)
@@ -65,6 +69,8 @@ public class seleniumFrontEndTest {
             boolean isSpecialtyPresent = driver.getPageSource().contains("New Specialty");
             assert isSpecialtyPresent : "New Specialty not found after refresh.";
             System.out.println("Specialty added and verified successfully.");
+
+            test.pass("Specialty successfully added");
         }
 
         @After
