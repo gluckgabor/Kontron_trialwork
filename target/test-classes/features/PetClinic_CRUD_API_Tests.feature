@@ -12,8 +12,8 @@ Feature: PetClinic BDD Keyword Driven API Tests
 	@UpdateOwner
 	Scenario:2 Owners update and read test
 			Given I update an Owner to have following data and save it
-				| firstName | lastName | address          | city   | telephone    |
-				| Anton     | Horvat   | Trg Jelacica 7   | Split  | 385987654321 |
+				| firstName | lastName | address           | city    | telephone  |
+				| GaborG     | GluckG    | 110 W. Liberty StG| MadisonG | 6085551020 |
 			When I refresh browser
 			Then I see owner is loaded back correctly
 

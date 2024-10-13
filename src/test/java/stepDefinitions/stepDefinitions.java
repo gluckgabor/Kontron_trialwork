@@ -92,7 +92,7 @@ public class stepDefinitions extends BaseClass {
 				.when()
 				.get(baseUrl)
 				.then()
-				.statusCode(200)
+				.statusCode(204)
 				.body("firstName", equalTo("Gabor"))
 				.body("lastName", equalTo("Gluck"))
 				.body("address", equalTo("110 W. Liberty St."))
