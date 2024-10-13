@@ -9,7 +9,7 @@ import utilities.BaseClass;
 
 import java.util.List;
 import java.util.Map;
-import java.time.LocalDateTime.*;
+import context.TestContext;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,15 +21,9 @@ public class stepDefinitions extends BaseClass {
 	
 	private static Logger logger = LogManager.getLogger(stepDefinitions.class);
 
+
+	private TestContext testContext = new TestContext();
 	private int createdOwnerId;
-
-	public void setCreatedOwnerId(int createdOwnerId) {
-		this.createdOwnerId = createdOwnerId;
-	}
-
-	public int getCreatedOwnerId() {
-		return createdOwnerId;
-	}
 
 	@Given("I add an Owner with following data and save it")
 	public void i_add_an_owner_with_following_data(DataTable dataTable) {
@@ -68,7 +62,7 @@ public class stepDefinitions extends BaseClass {
 			String responseBody = response.getBody().asString();
 			System.out.println(responseBody);
 
-			createdOwnerId = response.jsonPath().getInt("id");
+			testContext.setCreatedOwnerId(response.jsonPath().getInt("id"));
 		}
 	}
 
@@ -85,7 +79,8 @@ public class stepDefinitions extends BaseClass {
 
 	@Then("I see owner is loaded back correctly")
 	public void i_see_owner_is_loaded_back_correctly () {
-		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + createdOwnerId;
+		//createdOwnerId = testContext.getCreatedOwnerId();
+		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.createdOwnerId;
 
 		given()
 				.when()
@@ -98,13 +93,14 @@ public class stepDefinitions extends BaseClass {
 				.body("city", equalTo("Madison"))
 				.body("telephone", equalTo("6085551023"));
 
-		setCreatedOwnerId(createdOwnerId);
+		testContext.setCreatedOwnerId(response.jsonPath().getInt("id"));
 	}
 
 	// Step definitions for updating an owner
 	@Given("I update an Owner to have following data and save it")
 	public void i_update_an_owner_to_have_following_data(io.cucumber.datatable.DataTable dataTable) {
-		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + createdOwnerId;
+		createdOwnerId = testContext.getCreatedOwnerId();
+		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.createdOwnerId;
 
 		String firstName = "";
 		String lastName = "";
@@ -140,7 +136,7 @@ public class stepDefinitions extends BaseClass {
 	// Step definitions for deleting an owner
 	@Given("I delete an Owner")
 	public void i_delete_an_owner() {
-		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + createdOwnerId;
+		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.createdOwnerId;
 
 		given()
 				.when()
@@ -151,7 +147,7 @@ public class stepDefinitions extends BaseClass {
 
 	@Then("I see owner is correctly missing from returned results")
 	public void i_see_owner_is_correctly_missing_from_returned_results() {
-		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + createdOwnerId;
+		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.createdOwnerId;
 
 		given()
 				.when()
