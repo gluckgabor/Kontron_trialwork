@@ -20,7 +20,7 @@ public class seleniumFrontEndTest {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
             driver.manage().window().maximize();
-            driver.get("https://example.com/petclinic/specialties"); // Replace with actual URL
+            driver.get("http://localhost:4200/petclinic/specialties"); // Replace with actual URL
 
             // Initialize the Page Object
             specialtyPage = new SpecialtyPage(driver);
