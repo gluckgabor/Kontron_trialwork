@@ -18,18 +18,8 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 public class stepDefinitions extends BaseClass {
+	private static TestContext testContext = new TestContext(); // Singleton instance of TestContext
 	public stepDefinitions() {}
-
-	public TestContext testContext = new TestContext();
-
-	public stepDefinitions(TestContext testContext) {
-		this.testContext = testContext;
-	}
-
-	int createdOwnerId = testContext.getCreatedOwnerId();
-	public void setCreatedOwnerId(int x) {
-		createdOwnerId = testContext.getCreatedOwnerId();
-	}
 
 	public int getCreatedOwnerId() {
 		return testContext.getCreatedOwnerId();
