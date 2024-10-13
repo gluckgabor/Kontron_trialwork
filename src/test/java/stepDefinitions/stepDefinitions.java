@@ -17,13 +17,14 @@ import org.apache.logging.log4j.Logger;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
+
+
 public class stepDefinitions extends BaseClass {
 	
 	private static Logger logger = LogManager.getLogger(stepDefinitions.class);
 
-
-	private TestContext testContext = new TestContext();
-	private int createdOwnerId;
+	public TestContext testContext = new TestContext();
+	public int createdOwnerId = testContext.getCreatedOwnerId();
 
 	@Given("I add an Owner with following data and save it")
 	public void i_add_an_owner_with_following_data(DataTable dataTable) {
@@ -79,8 +80,8 @@ public class stepDefinitions extends BaseClass {
 
 	@Then("I see owner is loaded back correctly")
 	public void i_see_owner_is_loaded_back_correctly () {
-		//createdOwnerId = testContext.getCreatedOwnerId();
-		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.createdOwnerId;
+		createdOwnerId = testContext.getCreatedOwnerId();
+		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + createdOwnerId;
 
 		given()
 				.when()
@@ -92,14 +93,12 @@ public class stepDefinitions extends BaseClass {
 				.body("address", equalTo("110 W. Liberty St."))
 				.body("city", equalTo("Madison"))
 				.body("telephone", equalTo("6085551023"));
-
-		testContext.setCreatedOwnerId(response.jsonPath().getInt("id"));
 	}
 
 	// Step definitions for updating an owner
 	@Given("I update an Owner to have following data and save it")
 	public void i_update_an_owner_to_have_following_data(io.cucumber.datatable.DataTable dataTable) {
-		createdOwnerId = testContext.getCreatedOwnerId();
+		//createdOwnerId = testContext.getCreatedOwnerId();
 		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.createdOwnerId;
 
 		String firstName = "";
