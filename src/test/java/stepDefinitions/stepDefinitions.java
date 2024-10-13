@@ -23,6 +23,14 @@ public class stepDefinitions extends BaseClass {
 
 	private int createdOwnerId;
 
+	public void setCreatedOwnerId(int createdOwnerId) {
+		this.createdOwnerId = createdOwnerId;
+	}
+
+	public int getCreatedOwnerId() {
+		return createdOwnerId;
+	}
+
 	@Given("I add an Owner with following data and save it")
 	public void i_add_an_owner_with_following_data(DataTable dataTable) {
 		String baseUrl = "http://localhost:9966/petclinic/api/owners";
@@ -89,6 +97,8 @@ public class stepDefinitions extends BaseClass {
 				.body("address", equalTo("110 W. Liberty St."))
 				.body("city", equalTo("Madison"))
 				.body("telephone", equalTo("6085551023"));
+
+		setCreatedOwnerId(createdOwnerId);
 	}
 
 	// Step definitions for updating an owner
