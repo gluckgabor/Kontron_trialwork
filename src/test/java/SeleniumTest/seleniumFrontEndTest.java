@@ -1,23 +1,30 @@
 package SeleniumTest;
 
 import PageObjectModelForSeleniumTest.SpecialtyPage;
+import org.junit.experimental.runners.Enclosed;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
+@RunWith(Enclosed.class)
 public class seleniumFrontEndTest {
 
 
-    public class SpecialtyTest {
+    public static class SpecialtyTest {
         private WebDriver driver;
         private SpecialtyPage specialtyPage;
 
-        @BeforeMethod
+        @Before
         public void setUp() {
-            WebDriverManager.chromedriver().setup();
+            //String path = "src/test/java/utilities/chromedriver.exe"; //
+            //System.setProperty("webdriver.chrome.driver", path);
+            WebDriverManager.chromedriver().browserVersion("129.0.6668.101").setup();
+            //WebDriverManager.chromedriver().setup();
+            
             driver = new ChromeDriver();
             driver.manage().window().maximize();
             driver.get("http://localhost:4200/petclinic/specialties"); // Replace with actual URL
@@ -38,7 +45,7 @@ public class seleniumFrontEndTest {
             System.out.println("Specialty added and verified successfully.");
         }
 
-        @AfterMethod
+        @After
         public void tearDown() {
             if (driver != null) {
                 driver.quit();

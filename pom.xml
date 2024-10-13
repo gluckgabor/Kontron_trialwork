@@ -54,19 +54,14 @@
 			<version>2.16.1</version>
 		</dependency>
 
-		<!-- Log4j dependencies -->
+		<!-- Log4j dependencies
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-api</artifactId>
 			<version>2.22.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>2.22.0</version>
-		</dependency>
+		</dependency>-->
 
-		<!-- Extent Reports -->
+                <!-- Extent Reports -->
 		<dependency>
 			<groupId>tech.grasshopper</groupId>
 			<artifactId>extentreports-cucumber7-adapter</artifactId>
@@ -81,10 +76,16 @@
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>4.4.0</version> <!-- Use the latest version -->
+			<version>4.25.0</version> <!-- Use the latest version -->
 		</dependency>
-
-		<!-- WebDriver Manager to handle browser drivers -->
+		<!--
+                <dependency>
+                    <groupId>ch.qos.logback</groupId>
+                    <artifactId>logback-classic</artifactId>
+                    <version>1.2.11</version>
+                </dependency>
+        -->
+                <!-- WebDriver Manager to handle browser drivers -->
 		<dependency>
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
