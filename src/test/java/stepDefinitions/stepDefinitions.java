@@ -92,12 +92,29 @@ public class stepDefinitions extends BaseClass {
 				.when()
 				.get(baseUrl)
 				.then()
-				.statusCode(204)
+				.statusCode(200)
 				.body("firstName", equalTo("Gabor"))
 				.body("lastName", equalTo("Gluck"))
 				.body("address", equalTo("110 W. Liberty St."))
 				.body("city", equalTo("Madison"))
 				.body("telephone", equalTo("6085551023"));
+	}
+
+	@Then("I see owner is loaded back correctly after update")
+	public void i_see_owner_is_loaded_back_correctly_after_update () {
+		int createdOwnerId = testContext.getCreatedOwnerId();
+		String baseUrl = "http://localhost:9966/petclinic/api/owners/" + testContext.getCreatedOwnerId();;
+
+		given()
+				.when()
+				.get(baseUrl)
+				.then()
+				.statusCode(200)
+				.body("firstName", equalTo("GaborG"))
+				.body("lastName", equalTo("GluckG"))
+				.body("address", equalTo("110 W. Liberty StG"))
+				.body("city", equalTo("MadisonG"))
+				.body("telephone", equalTo("6085551020"));
 	}
 
 	// Step definitions for updating an owner
@@ -133,7 +150,7 @@ public class stepDefinitions extends BaseClass {
 				.when()
 				.put(baseUrl)
 				.then()
-				.statusCode(200); // Typically, a 204 No Content response is returned for successful updates
+				.statusCode(204); // Typically, a 204 No Content response is returned for successful updates
 		}
 	}
 

@@ -15,7 +15,7 @@ Feature: PetClinic BDD Keyword Driven API Tests
 				| firstName | lastName | address           | city    | telephone  |
 				| GaborG     | GluckG    | 110 W. Liberty StG| MadisonG | 6085551020 |
 			When I refresh browser
-			Then I see owner is loaded back correctly
+			Then I see owner is loaded back correctly after update
 
 	@DeleteOwner
 	Scenario:3 Owners delete and read test
